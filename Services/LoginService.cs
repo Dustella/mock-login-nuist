@@ -1,6 +1,6 @@
 public class LoginService
 {
-    private List<User> _db;
+    private readonly List<User> _db;
 
     public LoginService()
     {
@@ -24,5 +24,39 @@ public class LoginService
         // otherwise, return false
         return false;
 
+    }
+
+    public LoginResponse<SuccessData> GetSuccessResponse()
+    {
+        // return a success response
+        return new LoginResponse<SuccessData>
+        {
+            Code = 200,
+            Message = "ok",
+            Data = new SuccessData
+            {
+                Reauth = true,
+                Username = "test",
+                Balance = "test",
+                Duration = "test",
+                Outport = "test",
+                Totaltimespan = "test",
+                Usripadd = "test"
+            }
+        };
+    }
+
+    public LoginResponse<ErrorData> GetErrorResponse()
+    {
+        // return an error response
+        return new LoginResponse<ErrorData>
+        {
+            Code = 201,
+            Message = "ok",
+            Data = new ErrorData
+            {
+                Text = "Invalid username or password"
+            }
+        };
     }
 }
